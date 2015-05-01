@@ -259,7 +259,7 @@ class KinesisSink(provider: AWSCredentialsProvider,
           if (failurePairs.size > 0) {
             failurePairs foreach { f => error(s"Record failed with error code [${f._2.getErrorCode}] and message [${f._2.getErrorMessage}]") }
             backoffTime = getNextBackoff(backoffTime)
-            error("Retrying all failed records in $backoffTime milliseconds...")
+            error(s"Retrying all failed records in $backoffTime milliseconds...")
             unsentRecords = failurePairs.map(_._1)
             Thread.sleep(backoffTime)
           } else {
